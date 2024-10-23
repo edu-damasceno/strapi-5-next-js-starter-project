@@ -25,7 +25,7 @@ export default function ContentWithImage(data: Readonly<ContentWithImageProps>) 
       </div>
       <div className="flex flex-1 flex-col items-start gap-5">
         <div className="flex flex-col gap-3">
-          <h2 className="text-3xl font-semibold sm:text-4xl text-left text-primary-foreground">
+          <h2 className="text-2xl font-semibold sm:text-3xl text-left text-primary-foreground">
             {heading}
           </h2>
           <span>{subHeading}</span>

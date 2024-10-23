@@ -4,7 +4,9 @@ type ComponentType =
   | "layout.card-grid"
   | "layout.section-heading"
   | "layout.content-with-image"
-  | "layout.price-grid";
+  | "layout.price-grid"
+  | "layout.cover-image"
+  | "layout.page-title";
 
 interface Base<T extends ComponentType, D extends {} = {}> {
   __component: T;
@@ -27,7 +29,9 @@ export type Block =
   | CardGridProps
   | SectionHeadingProps
   | ContentWithImageProps
-  | PriceGridProps;
+  | PriceGridProps
+  | CoverImageProps
+  | PageTitleProps;
 
 export interface HeroProps extends Base<"layout.hero"> {
   heading: string;
@@ -89,4 +93,17 @@ export interface PriceGridProps extends Base<"layout.price-grid"> {
     }[];
     link: NavLink;
   }[];
+}
+
+export interface CoverImageProps extends Base<"layout.cover-image"> {
+  image: {
+    url: string;
+    alternativeText: string | null;
+    width: number;
+    height: number;
+  };
+}
+
+export interface PageTitleProps extends Base<"layout.page-title"> {
+  title: string;
 }

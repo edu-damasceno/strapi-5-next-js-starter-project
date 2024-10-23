@@ -2,7 +2,7 @@ import type { Config } from "tailwindcss";
 
 import { fontFamily } from "tailwindcss/defaultTheme";
 
-const config = {
+const config: Config = {
   darkMode: ["class"],
   content: [
     "./pages/**/*.{ts,tsx}",
@@ -75,9 +75,18 @@ const config = {
         sans: ["var(--font-sans)", ...fontFamily.sans],
         heading: ["var(--font-heading)", ...fontFamily.sans],
       },
+      height: {
+        'screen-minus-nav': 'calc(100vh - 64px)',
+      },
+      aspectRatio: {
+        'video': '16 / 9',
+      },
     },
   },
-  plugins: [require("tailwindcss-animate")],
-} satisfies Config;
+  plugins: [
+    require("tailwindcss-animate"),
+    require('@tailwindcss/aspect-ratio'),
+  ],
+};
 
 export default config;
