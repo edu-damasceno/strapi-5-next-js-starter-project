@@ -4,35 +4,35 @@
 
 @layer base {
   :root {
-    --background: 0 0% 4%;
-    --foreground: 0 0% 88%;
+    --background: 0 0% 100%;
+    --foreground: 0 0% 4%;
 
-    --card: 0 0% 8%;
-    --card-foreground: 0 0% 88%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 4%;
 
     --popover: 0 0% 8%;
     --popover-foreground: 0 0% 88%;
 
-    --primary: 180 100% 50%;
-    --primary-foreground: 0 0% 4%;
+    --primary: 180 61% 66%;
+    --primary-foreground: 180 31% 28%;
 
-    --secondary: 0 0% 11%;
-    --secondary-foreground: 0 0% 88%;
+    --secondary: 0 0% 4%;
+    --secondary-foreground: 0 0% 100%;
 
     --muted: 0 0% 18%;
     --muted-foreground: 0 0% 46%;
 
-    --accent: 300 100% 50%;
+    --accent: 10 68% 53%;
     --accent-foreground: 0 0% 4%;
 
     --destructive: 0 100% 60%;
     --destructive-foreground: 0 0% 4%;
 
-    --border: 0 0% 23%;
+    --border: 0 0% 100%;
     --input: 0 0% 11%;
     --ring: 180 100% 50%;
 
-    --radius: 0.75rem;
+    --radius: 2rem;
   }
 }
 
@@ -40,6 +40,7 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -48,7 +49,7 @@
 
 /******************************************* 
   Rich Text Styles
-*******************************************/ 
+*******************************************/
 
 /* Headers */
 .rich-text h1 {
@@ -120,17 +121,17 @@
   @apply mb-2 text-muted-foreground;
 }
 
-.rich-text li > ul {
+.rich-text li>ul {
   @apply list-disc pl-4 mb-2;
 }
 
-.rich-text li > ol {
+.rich-text li>ol {
   @apply list-decimal pl-4 mb-2 text-muted-foreground;
 }
 
 /* Code blocks */
 .rich-text pre {
-  @apply font-mono bg-gray-900 text-gray-200 rounded p-4  my-6;
+  @apply font-mono bg-gray-900 text-gray-200 rounded p-4 my-6;
 }
 
 .rich-text code {
@@ -159,4 +160,3 @@
 .rich-text .warning {
   @apply bg-yellow-100 border-yellow-500 text-yellow-700 px-4 py-2 rounded-lg mb-4;
 }
-

@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_layout_hero_with_videos",
+  "info": {
+    "displayName": "Hero With Video"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string"
+    },
+    "text": {
+      "type": "text"
+    },
+    "buttonLink": {
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.link"
+    },
+    "youtubeVideoId": {
+      "type": "string"
+    }
+  }
+}

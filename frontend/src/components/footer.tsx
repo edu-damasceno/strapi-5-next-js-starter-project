@@ -29,7 +29,7 @@ const YouTubeIcon = () => (
   </svg>
 );
 
-const TwitterIcon = () => (
+const InstagramIcon = () => (
   <svg viewBox="0 0 248 204" className="size-5">
     <path
       fill="currentColor"
@@ -38,7 +38,7 @@ const TwitterIcon = () => (
   </svg>
 );
 
-const GitHubIcon = () => (
+const FacebookIcon = () => (
   <svg viewBox="0 0 438.549 438.549" className="size-5">
     <path
       fill="currentColor"
@@ -49,12 +49,12 @@ const GitHubIcon = () => (
 
 function renderIcon(text: string) {
   switch (text) {
-    case "twitter":
-      return <TwitterIcon />;
-    case "github":
-      return <GitHubIcon />;
     case "youtube":
       return <YouTubeIcon />;
+    case "instagram":
+      return <InstagramIcon />;
+    case "facebook":
+      return <FacebookIcon />;
     default:
       return null;
   }

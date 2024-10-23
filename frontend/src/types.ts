@@ -1,5 +1,6 @@
 type ComponentType =
   | "layout.hero"
+  | "layout.hero-with-video"
   | "layout.card-grid"
   | "layout.section-heading"
   | "layout.content-with-image"
@@ -20,7 +21,13 @@ export interface NavLink {
   isPrimary: boolean;
 }
 
-export type Block = HeroProps | CardGridProps | SectionHeadingProps | ContentWithImageProps | PriceGridProps;
+export type Block =
+  | HeroProps
+  | HeroWithVideoProps
+  | CardGridProps
+  | SectionHeadingProps
+  | ContentWithImageProps
+  | PriceGridProps;
 
 export interface HeroProps extends Base<"layout.hero"> {
   heading: string;
@@ -34,11 +41,18 @@ export interface HeroProps extends Base<"layout.hero"> {
   };
 }
 
+export interface HeroWithVideoProps extends Base<"layout.hero-with-video"> {
+  heading: string;
+  text: string;
+  buttonLink?: NavLink[];
+  youtubeVideoId: string;
+};
+
 export interface CardGridProps extends Base<"layout.card-grid"> {
   cardItems: {
     id: string;
     heading: string;
-    text: string;
+    text?: string;
     icon: string;
   }[];
 }
@@ -59,6 +73,7 @@ export interface ContentWithImageProps extends Base<"layout.content-with-image">
   heading: string;
   subHeading: string;
   text: string;
+  buttonLink?: NavLink[];
 }
 
 export interface PriceGridProps extends Base<"layout.price-grid"> {

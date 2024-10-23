@@ -8,59 +8,75 @@ import { SectionHeading } from "@/components/section-heading";
 import ContentWithImage from "@/components/content-with-image";
 import { Pricing } from "@/components/pricing";
 import { CardCarousel } from "@/components/card-carousel";
+import { HeroWithVideo } from "@/components/hero-with-video";
 
 async function loader() {
-  const { fetchData } = await import("@/lib/fetch");
-  const path = "/api/landing-page";
-  const baseUrl = getStrapiURL();
+  try {
+    const { fetchData } = await import("@/lib/fetch");
+    const path = "/api/landing-page";
+    const baseUrl = getStrapiURL();
 
-  const query = qs.stringify({
-    populate: {
-      blocks: {
-        on: {
-          "layout.hero": {
-            populate: {
-              image: {
-                fields: ["url", "alternativeText", "name"],
+    const query = qs.stringify({
+      populate: {
+        blocks: {
+          on: {
+            "layout.hero": {
+              populate: {
+                image: {
+                  fields: ["url", "alternativeText", "name"],
+                },
+                buttonLink: {
+                  populate: "*",
+                },
+                topLink: {
+                  populate: "*",
+                },
               },
-              buttonLink: {
-                populate: "*",
+            },
+            "layout.hero-with-video": {
+              populate: {
+                buttonLink: {
+                  populate: "*",
+                },
+                youtubeVideoId: true,
               },
-              topLink: {
-                populate: "*",
+            },
+            "layout.card-grid": {
+              populate: "*",
+            },
+            "layout.section-heading": {
+              populate: "*",
+            },
+            "layout.content-with-image": {
+              populate: {
+                image: {
+                  fields: ["url", "alternativeText", "name"],
+                },
+                buttonLink: {
+                  populate: "*",
+                },
+              },
+            },
+            "layout.price-grid": {
+              populate: {
+                priceCard: {
+                  populate: "*",
+                },
               },
             },
           },
-          "layout.card-grid": {
-            populate: "*",
-          },
-          "layout.section-heading": {
-            populate: "*",
-          },
-          "layout.content-with-image": {
-            populate: {
-              image: {
-                fields: ["url", "alternativeText", "name"],
-              },
-            }
-          },
-          "layout.price-grid": {
-            populate: {
-              priceCard: {
-                populate: "*",
-              },
-            }
-          },
-         
         },
       },
-    },
-  });
+    });
 
-  const url = new URL(path, baseUrl);
-  url.search = query;
-  const data = await fetchData(url.href);
-  return data;
+    const url = new URL(path, baseUrl);
+    url.search = query;
+    const data = await fetchData(url.href);
+    return data;
+  } catch (error) {
+    console.error("Error in loader:", error);
+    throw error;
+  }
 }
 
 function BlockRenderer(block: Block) {
@@ -68,6 +84,8 @@ function BlockRenderer(block: Block) {
   switch (block.__component) {
     case "layout.hero":
       return <Hero key={block.id} {...block} />;
+    case "layout.hero-with-video":
+      return <HeroWithVideo key={block.id} {...block} />;
     case "layout.card-grid":
       return <CardCarousel key={block.id} {...block} />;
     case "layout.section-heading":
@@ -85,7 +103,5 @@ export default async function Home() {
   const data = await loader();
   const blocks = data?.data?.blocks;
   if (!blocks) return null;
-  return <div>
-    {blocks ? blocks.map((block: any) => BlockRenderer(block)) : null}
-  </div>;
+  return <>{blocks ? blocks.map((block: any) => BlockRenderer(block)) : null}</>;
 }

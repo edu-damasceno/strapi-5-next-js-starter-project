@@ -9,7 +9,6 @@ import { StrapiImage } from "./strapi-image";
 export function Hero(data: Readonly<HeroProps>) {
   if (!data) return null;
   const { heading, text, topLink, buttonLink, image } = data;
-  console.log(topLink, "Top Link");
   return (
     <section className="container flex flex-col items-center gap-10 pb-28 pt-20 sm:gap-14 md:flex-row">
       <div className="flex flex-1 flex-col items-center gap-8 md:items-start md:gap-10">
@@ -29,7 +28,7 @@ export function Hero(data: Readonly<HeroProps>) {
           {heading}
         </h1>
         <p className="max-w-md text-center text-lg text-muted-foreground md:text-left">{text}</p>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="w-full flex justify-center md:justify-start">
           {buttonLink &&
             buttonLink.map((link) => (
               <Button

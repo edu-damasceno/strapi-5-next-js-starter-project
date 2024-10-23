@@ -2,16 +2,17 @@ import React from "react";
 import type { ContentWithImageProps } from "@/types";
 import { cn } from "@/lib/utils";
 import { StrapiImage } from "./strapi-image";
-
+import { Button } from "./ui/button";
+import Link from "next/link";
 
 export default function ContentWithImage(data: Readonly<ContentWithImageProps>) {
-  if (!data ) return null;
-  const { reverse, image, heading, subHeading, text } = data;
+  if (!data) return null;
+  const { reverse, image, heading, subHeading, text, buttonLink } = data;
   const revereStyle = reverse ? "md:flex-row-reverse" : "md:flex-row";
 
   return (
     <section
-      className={cn("container flex flex-col gap-10 py-24 md:items-center md:gap-24", revereStyle)}
+      className={cn("container flex flex-col gap-10 py-12 md:items-center md:gap-12", revereStyle)}
     >
       <div className="relative flex-1">
         <StrapiImage
@@ -24,15 +25,28 @@ export default function ContentWithImage(data: Readonly<ContentWithImageProps>) 
       </div>
       <div className="flex flex-1 flex-col items-start gap-5">
         <div className="flex flex-col gap-3">
-          <span className="font-bold uppercase text-primary text-left">{subHeading}</span>
-          <h2 className="font-heading text-3xl font-semibold sm:text-4xl text-left">
+          <h2 className="text-3xl font-semibold sm:text-4xl text-left text-primary-foreground">
             {heading}
           </h2>
+          <span>{subHeading}</span>
         </div>
-        <p className="text-lg text-muted-foreground max-w-lg text-left">
-          {text}
-        </p>
-        
+        <p className="text-lg text-muted-foreground max-w-lg text-left">{text}</p>
+        <div className="w-full flex justify-start gap-3">
+          {buttonLink &&
+            buttonLink.map((link) => (
+              <Button
+                key={link.text}
+                size="lg"
+                variant={link.isPrimary ? "default" : "secondary"}
+                asChild
+                className="h-12 cursor-pointer border-border text-base sm:h-14 sm:px-10 font-bold"
+              >
+                <Link href={link.href} target={link.isExternal ? "_blank" : "_self"}>
+                  {link.text}
+                </Link>
+              </Button>
+            ))}
+        </div>
       </div>
     </section>
   );

@@ -18,6 +18,13 @@
       "type": "component",
       "repeatable": false,
       "component": "elements.link"
+    },
+    "logoImage": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }

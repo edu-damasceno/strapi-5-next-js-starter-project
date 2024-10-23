@@ -10,6 +10,7 @@ export interface LayoutTopNav extends Struct.ComponentSchema {
     logoText: Schema.Attribute.String;
     navItems: Schema.Attribute.Component<'elements.link', true>;
     cta: Schema.Attribute.Component<'elements.link', false>;
+    logoImage: Schema.Attribute.Media<'images'>;
   };
 }
 
@@ -50,6 +51,19 @@ export interface LayoutHero extends Struct.ComponentSchema {
   };
 }
 
+export interface LayoutHeroWithVideo extends Struct.ComponentSchema {
+  collectionName: 'components_layout_hero_with_videos';
+  info: {
+    displayName: 'Hero With Video';
+  };
+  attributes: {
+    heading: Schema.Attribute.String;
+    text: Schema.Attribute.Text;
+    buttonLink: Schema.Attribute.Component<'elements.link', true>;
+    youtubeVideoId: Schema.Attribute.String;
+  };
+}
+
 export interface LayoutFooter extends Struct.ComponentSchema {
   collectionName: 'components_layout_footers';
   info: {
@@ -65,6 +79,7 @@ export interface LayoutContentWithImage extends Struct.ComponentSchema {
   collectionName: 'components_layout_content_with_images';
   info: {
     displayName: 'Content With Image';
+    description: '';
   };
   attributes: {
     heading: Schema.Attribute.String;
@@ -72,6 +87,7 @@ export interface LayoutContentWithImage extends Struct.ComponentSchema {
     text: Schema.Attribute.Text;
     image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     reverse: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    buttonLink: Schema.Attribute.Component<'elements.link', true>;
   };
 }
 
@@ -129,10 +145,21 @@ export interface ElementsCard extends Struct.ComponentSchema {
   collectionName: 'components_elements_cards';
   info: {
     displayName: 'Card';
+    description: '';
   };
   attributes: {
     icon: Schema.Attribute.Enumeration<
-      ['Frame', 'Download', 'Globe', 'Sparkles', 'LayoutPanelLeft', 'Palette']
+      [
+        'Frame',
+        'Download',
+        'Globe',
+        'Sparkles',
+        'LayoutPanelLeft',
+        'Palette',
+        'Kayaking',
+        'Surfing',
+        'SUPing',
+      ]
     >;
     heading: Schema.Attribute.String;
     text: Schema.Attribute.Text;
@@ -146,6 +173,7 @@ declare module '@strapi/strapi' {
       'layout.section-heading': LayoutSectionHeading;
       'layout.price-grid': LayoutPriceGrid;
       'layout.hero': LayoutHero;
+      'layout.hero-with-video': LayoutHeroWithVideo;
       'layout.footer': LayoutFooter;
       'layout.content-with-image': LayoutContentWithImage;
       'layout.card-grid': LayoutCardGrid;
