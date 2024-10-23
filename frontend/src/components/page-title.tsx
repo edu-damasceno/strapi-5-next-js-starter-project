@@ -41,14 +41,14 @@ export function PageTitle({ title }: PageTitleProps) {
 
   return (
     <section
-      className={`text-4xl md:text-6xl font-bold text-white p-4 md:p-8 transition-all duration-300
+      className={`text-4xl md:text-6xl font-bold text-white py-4 md:py-8 transition-all duration-300
         ${
           !isMobile && isFixed
             ? "fixed bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent"
             : "relative bg-black/90"
         }`}
     >
-      <h1 className="container">{title}</h1>
+      <h1 className="container ">{title}</h1>
     </section>
   );
 }
