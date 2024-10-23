@@ -1,0 +1,17 @@
+{
+    "collectionName": "components_layout_cover_images",
+    "info": {
+      "displayName": "Cover Image",
+      "icon": "picture"
+    },
+    "attributes": {
+      "image": {
+        "type": "media",
+        "multiple": false,
+        "required": true
+      },
+      "altText": {
+        "type": "string"
+      }
+    }
+  }

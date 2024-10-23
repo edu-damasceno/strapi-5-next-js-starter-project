@@ -1,0 +1,13 @@
+{
+    "collectionName": "components_layout_page_titles",
+    "info": {
+      "displayName": "Page Title",
+      "icon": "heading"
+    },
+    "attributes": {
+      "title": {
+        "type": "string",
+        "required": true
+      }
+    }
+  }
