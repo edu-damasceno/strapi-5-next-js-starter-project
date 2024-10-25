@@ -5,10 +5,11 @@ import { getStrapiURL } from "@/lib/utils";
 
 import { Hero } from "@/components/hero";
 import { SectionHeading } from "@/components/section-heading";
-import ContentWithImage from "@/components/content-with-image";
+import { ContentWithImage } from "@/components/content-with-image";
 import { Pricing } from "@/components/pricing";
 import { CardCarousel } from "@/components/card-carousel";
 import { HeroWithVideo } from "@/components/hero-with-video";
+import { Main } from "@/components/main";
 
 async function loader() {
   try {
@@ -55,6 +56,7 @@ async function loader() {
                 buttonLink: {
                   populate: "*",
                 },
+                variant: true,
               },
             },
             "layout.price-grid": {
@@ -103,5 +105,5 @@ export default async function Home() {
   const data = await loader();
   const blocks = data?.data?.blocks;
   if (!blocks) return null;
-  return <>{blocks ? blocks.map((block: any) => BlockRenderer(block)) : null}</>;
+  return <Main noPadding>{blocks ? blocks.map((block: any) => BlockRenderer(block)) : null}</Main>;
 }
