@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { NavLink } from "@/types";
 import Link from "next/link";
 
@@ -24,14 +25,18 @@ interface HeaderProps {
 export function Header({ data, isHomePage, isScrolled }: Readonly<HeaderProps>) {
   if (!data) return null;
   const { logoImage, logoText, navItems, cta } = data;
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <header
-      className={`transition-all duration-500 ease-in-out ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${
         isScrolled
-          ? "fixed top-0 left-0 right-0 z-50 bg-black/90 shadow-md translate-y-0"
-          : isHomePage
-            ? "relative bg-black/90 md:absolute md:top-0 md:left-0 md:right-0 md:z-50 md:bg-black/20 translate-y-0"
-            : "relative bg-black/90 -translate-y-2"
+          ? menuOpen
+            ? "bg-black/90"
+            : "bg-black/70 shadow-md"
+          : isHomePage && !menuOpen
+            ? "bg-black/15"
+            : "bg-black/90"
       }`}
     >
       <div className="container flex items-center justify-between gap-10 py-4 transition-all duration-300 ease-in-out">
@@ -81,8 +86,8 @@ export function Header({ data, isHomePage, isScrolled }: Readonly<HeaderProps>) 
             </div>
           )}
         </div>
-        <MobileNavbar>
-          <div className="absolute flex items-center gap-10 bg-white left-0 right-0 top-0 rounded-b-lg py-4 container text-black shadow-xl">
+        <MobileNavbar setMenuOpen={setMenuOpen}>
+          <div className="absolute flex items-center gap-10 bg-white left-0 right-0 top-0 rounded-b-lg py-4 container text-black shadow-xl text-sm">
             <nav className="flex flex-col gap-1 pt-2 w-full">
               {navItems &&
                 navItems.map((item) => (
