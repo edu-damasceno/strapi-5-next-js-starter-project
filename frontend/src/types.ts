@@ -6,7 +6,8 @@ type ComponentType =
   | "layout.content-with-image"
   | "layout.price-grid"
   | "layout.cover-image"
-  | "layout.page-title";
+  | "layout.page-title"
+  | "elements.breadcrumbs";
 
 interface Base<T extends ComponentType, D extends {} = {}> {
   __component: T;
@@ -31,7 +32,8 @@ export type Block =
   | ContentWithImageProps
   | PriceGridProps
   | CoverImageProps
-  | PageTitleProps;
+  | PageTitleProps
+  | BreadcrumbsProps;
 
 export interface HeroProps extends Base<"layout.hero"> {
   heading: string;
@@ -78,6 +80,7 @@ export interface ContentWithImageProps extends Base<"layout.content-with-image">
   subHeading: string;
   text: string;
   buttonLink?: NavLink[];
+  variant?: string;
 }
 
 export interface PriceGridProps extends Base<"layout.price-grid"> {
@@ -106,4 +109,13 @@ export interface CoverImageProps extends Base<"layout.cover-image"> {
 
 export interface PageTitleProps extends Base<"layout.page-title"> {
   title: string;
+}
+
+export interface BreadcrumbItem {
+  label: string;
+  href: string;
+}
+
+export interface BreadcrumbsProps extends Base<"elements.breadcrumbs"> {
+  items: BreadcrumbItem[];
 }

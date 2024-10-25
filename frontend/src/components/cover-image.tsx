@@ -7,14 +7,13 @@ export interface CoverImageProps {
     width: number;
     height: number;
   };
-  // ... other props ...
 }
 
 export function CoverImage({ image, ...props }: CoverImageProps) {
   if (!image || !image.url) return null;
 
   return (
-    <div className="relative w-full aspect-video md:aspect-auto md:h-[calc(100vh-64px)]">
+    <div className="relative h-96 w-full">
       <Image
         src={`${process.env.STRAPI_BASE_URL}${image.url}`}
         alt={image.alternativeText || "Cover image"}
