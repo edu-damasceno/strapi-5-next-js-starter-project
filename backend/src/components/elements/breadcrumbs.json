@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_elements_breadcrumbs",
+  "info": {
+    "displayName": "Breadcrumbs",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.breadcrumb-item"
+    }
+  }
+}
