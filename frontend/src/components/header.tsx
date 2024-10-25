@@ -23,13 +23,14 @@ interface HeaderProps {
 }
 
 export function Header({ data, isHomePage, isScrolled }: Readonly<HeaderProps>) {
+  const { isMenuOpen, setIsMenuOpen } = useMenu();
+
   if (!data) return null;
   const { logoImage, logoText, navItems, cta } = data;
-  const { isMenuOpen, setIsMenuOpen } = useMenu();
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-in-out ${
         isScrolled
           ? isMenuOpen
             ? "bg-black/90"
@@ -54,13 +55,13 @@ export function Header({ data, isHomePage, isScrolled }: Readonly<HeaderProps>) 
             <span className="font-heading text-xl font-bold text-white">{logoText}</span>
           )}
         </Link>
-        <div className="hidden lg:flex items-center gap-10">
-          <nav className="hidden items-center gap-10 lg:flex justify-end">
+        <div className="hidden items-center gap-10 lg:flex">
+          <nav className="hidden items-center justify-end gap-10 lg:flex">
             {navItems &&
               navItems.map((item) => (
                 <Link
                   href={item.href}
-                  className="flex cursor-pointer items-center text-lg text-white transition-colors hover:text-gray-200 sm:text-sm font-bold tracking-wider"
+                  className="flex cursor-pointer items-center text-lg font-bold tracking-wider text-white transition-colors hover:text-gray-200 sm:text-sm"
                   key={item.text}
                   target={item.isExternal ? "_blank" : "_self"}
                   onClick={() => setIsMenuOpen(false)}
@@ -74,7 +75,7 @@ export function Header({ data, isHomePage, isScrolled }: Readonly<HeaderProps>) 
               <Button
                 asChild
                 variant="outline"
-                className="bg-transparent text-white border-white hover:bg-white hover:text-black font-bold tracking-wider"
+                className="border-white bg-transparent font-bold tracking-wider text-white hover:bg-white hover:text-black"
               >
                 <Link
                   href={cta.href}
@@ -88,14 +89,14 @@ export function Header({ data, isHomePage, isScrolled }: Readonly<HeaderProps>) 
           )}
         </div>
         <MobileNavbar>
-          <div className="absolute flex items-center gap-10 bg-white left-0 right-0 top-0 rounded-b-lg py-4 container text-black shadow-xl text-sm">
-            <nav className="flex flex-col gap-1 pt-2 w-full">
+          <div className="container absolute inset-x-0 top-0 flex items-center gap-10 rounded-b-lg bg-white py-4 text-sm text-black shadow-xl">
+            <nav className="flex w-full flex-col gap-1 pt-2">
               {navItems &&
                 navItems.map((item) => (
                   <Link
                     key={item.text}
                     href={item.href}
-                    className="flex w-full cursor-pointer items-center rounded-md p-2 text-gray-600 hover:text-black justify-center font-bold"
+                    className="flex w-full cursor-pointer items-center justify-center rounded-md p-2 font-bold text-gray-600 hover:text-black"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {item.text}

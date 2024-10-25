@@ -84,10 +84,10 @@ export function YouTubeBackground({ videoId }: YouTubeBackgroundProps) {
   }
 
   return (
-    <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-10">
+    <div className="pointer-events-none absolute inset-0 z-10 size-full overflow-hidden">
       <div
         ref={playerRef}
-        className="absolute top-1/2 left-1/2 w-[100vw] h-[56.25vw] min-h-[100%] min-w-[177.77vh] -translate-x-1/2 -translate-y-1/2 md:min-h-[100vh] z-10"
+        className="absolute left-1/2 top-1/2 z-10 h-[56.25vw] min-h-full w-screen min-w-[177.77vh] -translate-x-1/2 -translate-y-1/2 md:min-h-screen"
       />
     </div>
   );

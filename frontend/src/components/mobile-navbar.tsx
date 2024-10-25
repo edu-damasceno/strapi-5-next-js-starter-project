@@ -12,7 +12,7 @@ function MobileMenu({ onClose, children }: { onClose: () => void; children: Reac
 
   return (
     <div
-      className="fixed w-full left-0 right-0 top-0 h-[calc(100vh)] inset-x-0 bottom-0 z-[9998] bg-black/40 lg:hidden"
+      className="fixed inset-0 z-[9998] h-[calc(100vh)] w-full bg-black/40 lg:hidden"
       style={{ top: `${headerHeight}px` }}
       onClick={onClose}
     >
@@ -32,7 +32,7 @@ export function MobileNavbar({ children }: { children: ReactNode }) {
 
   return (
     <div className="lg:hidden">
-      <button onClick={toggleMenu} className="flex items-center space-x-2 text-white z-50 relative">
+      <button onClick={toggleMenu} className="relative z-50 flex items-center space-x-2 text-white">
         {isMenuOpen ? <X /> : <Menu />}
       </button>
       {isMenuOpen && <MobileMenu onClose={() => setIsMenuOpen(false)}>{children}</MobileMenu>}

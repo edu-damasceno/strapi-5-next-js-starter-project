@@ -18,7 +18,7 @@ export async function CategorySelect() {
   console.log(categories);
 
   return (
-    <div className="w-full flex gap-2 justify-center items-center">
+    <div className="flex w-full items-center justify-center gap-2">
       {categories.map(({ text, documentId }: { text: string; documentId: string }) => (
         <CategoryButton key={documentId} value={text}>
           {text}

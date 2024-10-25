@@ -7,7 +7,7 @@ export function PageTitle(data: Readonly<PageTitleData>) {
   const { title } = data;
 
   return (
-    <section className="text-3xl md:text-4xl lg:text-5xl font-bold text-white py-4 md:py-8 transition-all duration-300 z-10 relative bg-black/90">
+    <section className="relative z-10 bg-black/90 py-4 text-3xl font-bold text-white transition-all duration-300 md:py-8 md:text-4xl lg:text-5xl">
       <h1 className="container">{title}</h1>
     </section>
   );

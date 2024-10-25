@@ -25,13 +25,13 @@ export function ContentWithImage(data: Readonly<ContentWithImageProps>) {
       </div>
       <div className="flex flex-1 flex-col items-start gap-5">
         <div className="flex flex-col gap-3">
-          <h2 className="text-2xl font-semibold sm:text-3xl text-left text-primary-foreground">
+          <h2 className="text-left text-2xl font-semibold text-primary-foreground sm:text-3xl">
             {heading}
           </h2>
           <span>{subHeading}</span>
         </div>
-        <p className="text-lg text-muted-foreground max-w-lg text-left">{text}</p>
-        <div className="w-full flex justify-start gap-3">
+        <p className="max-w-lg text-left text-lg text-muted-foreground">{text}</p>
+        <div className="flex w-full justify-start gap-3">
           {buttonLink &&
             buttonLink.map((link) => (
               <Button
@@ -39,7 +39,7 @@ export function ContentWithImage(data: Readonly<ContentWithImageProps>) {
                 size="lg"
                 variant={link.isPrimary ? "default" : "secondary"}
                 asChild
-                className="h-12 cursor-pointer border-border text-base sm:h-14 sm:px-10 font-bold"
+                className="h-12 cursor-pointer border-border text-base font-bold sm:h-14 sm:px-10"
               >
                 <Link href={link.href} target={link.isExternal ? "_blank" : "_self"}>
                   {link.text}

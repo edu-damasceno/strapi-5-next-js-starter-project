@@ -54,7 +54,7 @@ export default async function SinglePost({ params }: Props) {
     <article>
       <div>
         <header className="container mx-auto my-10">
-          <h1 className="text-6xl font-bold tracking-tighter sm:text-5xl mb-4">{post.title}</h1>
+          <h1 className="mb-4 text-6xl font-bold tracking-tighter sm:text-5xl">{post.title}</h1>
           <p className="text-muted-foreground">
             Posted on {formatDate(post.publishedAt)} - {post.category.text}
           </p>
@@ -64,7 +64,7 @@ export default async function SinglePost({ params }: Props) {
             width={800}
             height={600}
             priority
-            className="w-full rounded-lg mt-8"
+            className="mt-8 w-full rounded-lg"
           />
         </header>
       </div>

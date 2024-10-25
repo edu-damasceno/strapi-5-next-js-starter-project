@@ -24,7 +24,7 @@ export function Pricing(data: Readonly<PriceGridProps>) {
                   <span className="font-heading text-5xl font-semibold">${price}</span>
                   <span className="text-sm"> /month</span>
                 </div>
-                <ul className="space-y-2 mt-9">
+                <ul className="mt-9 space-y-2">
                   {feature &&
                     feature.map((item) => (
                       <li className="flex items-center gap-2" key={item.id}>

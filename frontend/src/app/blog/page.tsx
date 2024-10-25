@@ -77,10 +77,10 @@ export default async function BlogRoute({ searchParams }: SearchParamsProps) {
   return (
     <section className="container flex flex-col items-center gap-6 py-24 sm:gap-7">
       <div className="flex flex-col gap-3">
-        <span className="font-bold uppercase text-primary text-center">Articles</span>
-        <h2 className="font-heading text-3xl font-semibold sm:text-4xl text-center">Our Blog</h2>
+        <span className="text-center font-bold uppercase text-primary">Articles</span>
+        <h2 className="text-center font-heading text-3xl font-semibold sm:text-4xl">Our Blog</h2>
       </div>
-      <p className="text-lg text-muted-foreground max-w-2xl text-center">
+      <p className="max-w-2xl text-center text-lg text-muted-foreground">
         Checkout some of our cool articles. We write about the latest trends in tech, design and much more.
       </p>
       <CategorySelect />
@@ -89,21 +89,21 @@ export default async function BlogRoute({ searchParams }: SearchParamsProps) {
         {posts &&
           posts.map((item: PostProps) => (
             <Link href={"/blog/" + item.slug} key={item.documentId}>
-              <Card className="h-full shadow-lg border-none">
+              <Card className="h-full border-none shadow-lg">
                 <CardContent className="flex h-full flex-col items-start gap-5 px-0">
                   <div className="relative h-52 w-full">
                     <StrapiImage
                       alt={item.image.alternativeText}
                       src={item.image.url}
                       fill
-                      className="object-cover rounded-t-lg"
+                      className="rounded-t-lg object-cover"
                     />
                   </div>
                   <div className="flex flex-1 flex-col gap-4 px-5">
                     <h4 className="text-lg font-semibold">{item.title}</h4>
                     <p className="mb-auto text-muted-foreground">{item.description}</p>
                     <div className="flex items-center gap-3">
-                      <span className="rounded-full outline outline-1 outline-primary text-primary px-3 py-0.5 text-sm">
+                      <span className="rounded-full px-3 py-0.5 text-sm text-primary outline outline-1 outline-primary">
                         {item.category.text}
                       </span>
                       <span className="text-sm text-muted-foreground">{formatDate(item.publishedAt)}</span>

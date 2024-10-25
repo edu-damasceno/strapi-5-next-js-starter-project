@@ -28,7 +28,7 @@ export function Hero(data: Readonly<HeroProps>) {
           {heading}
         </h1>
         <p className="max-w-md text-center text-lg text-muted-foreground md:text-left">{text}</p>
-        <div className="w-full flex justify-center md:justify-start">
+        <div className="flex w-full justify-center md:justify-start">
           {buttonLink &&
             buttonLink.map((link) => (
               <Button
