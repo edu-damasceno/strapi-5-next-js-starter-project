@@ -6,11 +6,13 @@ import { getStrapiURL } from "@/lib/utils";
 import { Hero } from "@/components/hero";
 import { CardGrid } from "@/components/card-grid";
 import { SectionHeading } from "@/components/section-heading";
-import ContentWithImage from "@/components/content-with-image";
-import { CoverImage, CoverImageProps } from "@/components/cover-image";
+import { ContentWithImage } from "@/components/content-with-image";
+import { CoverImage } from "@/components/cover-image";
 import { PageTitle } from "@/components/page-title";
 import { HeroWithVideo } from "@/components/hero-with-video";
 import { Pricing } from "@/components/pricing";
+import { Breadcrumbs } from "@/components/breadbrumbs";
+import { Main } from "@/components/main";
 
 interface StaticParamsProps {
   id: number;
@@ -86,6 +88,9 @@ async function loader(slug: string) {
           "layout.page-title": {
             populate: "*",
           },
+          "elements.breadcrumbs": {
+            populate: "*",
+          },
         },
       },
     },
@@ -101,7 +106,6 @@ async function loader(slug: string) {
 }
 
 function BlockRenderer(block: Block) {
-  console.log(block.__component, "From BlockRenderer");
   switch (block.__component) {
     case "layout.hero":
       return <Hero key={block.id} {...block} />;
@@ -116,9 +120,12 @@ function BlockRenderer(block: Block) {
     case "layout.price-grid":
       return <Pricing key={block.id} {...block} />;
     case "layout.cover-image":
-      return <CoverImage key={block.id} {...(block as CoverImageProps)} />;
+      return <CoverImage key={block.id} {...block} />;
     case "layout.page-title":
       return <PageTitle key={block.id} {...block} />;
+    case "elements.breadcrumbs":
+      console.log("breadcrumbs", block);
+      return <Breadcrumbs key={block.id} {...block} />;
     default:
       return null;
   }
@@ -131,23 +138,5 @@ export default async function PageBySlugRoute({ params }: { params: { slug: stri
 
   if (!blocks) return null;
 
-  // Find the cover image and page title blocks
-  const coverImageBlock = blocks.find((block: Block) => block.__component === "layout.cover-image");
-  const pageTitleBlock = blocks.find((block: Block) => block.__component === "layout.page-title");
-
-  // Filter out the cover image and page title from the remaining blocks
-  const otherBlocks = blocks.filter(
-    (block: Block) =>
-      block.__component !== "layout.cover-image" && block.__component !== "layout.page-title",
-  );
-
-  return (
-    <div className="relative">
-      <div className="relative">
-        {coverImageBlock && <CoverImage {...(coverImageBlock as CoverImageProps)} />}
-        {pageTitleBlock && <PageTitle {...pageTitleBlock} />}
-      </div>
-      <div className="relative z-0">{otherBlocks.map((block: Block) => BlockRenderer(block))}</div>
-    </div>
-  );
+  return <Main>{blocks.map((block: Block) => BlockRenderer(block))}</Main>;
 }
