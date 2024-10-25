@@ -75,12 +75,6 @@ const config: Config = {
         sans: ["var(--font-sans)", ...fontFamily.sans],
         heading: ["var(--font-heading)", ...fontFamily.sans],
       },
-      height: {
-        'screen-minus-nav': 'calc(100vh - 64px)',
-      },
-      aspectRatio: {
-        'video': '16 / 9',
-      },
     },
   },
   plugins: [
