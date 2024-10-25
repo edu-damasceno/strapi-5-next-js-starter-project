@@ -1,10 +1,10 @@
-import { useState } from "react";
 import type { NavLink } from "@/types";
 import Link from "next/link";
+import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
 import { MobileNavbar } from "@/components/mobile-navbar";
-import Image from "next/image";
+import { useMenu } from "@/contexts/menu-context";
 
 interface HeaderProps {
   data: {
@@ -25,22 +25,22 @@ interface HeaderProps {
 export function Header({ data, isHomePage, isScrolled }: Readonly<HeaderProps>) {
   if (!data) return null;
   const { logoImage, logoText, navItems, cta } = data;
-  const [menuOpen, setMenuOpen] = useState(false);
+  const { isMenuOpen, setIsMenuOpen } = useMenu();
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${
         isScrolled
-          ? menuOpen
+          ? isMenuOpen
             ? "bg-black/90"
             : "bg-black/70 shadow-md"
-          : isHomePage && !menuOpen
+          : isHomePage && !isMenuOpen
             ? "bg-black/15"
             : "bg-black/90"
       }`}
     >
       <div className="container flex items-center justify-between gap-10 py-4 transition-all duration-300 ease-in-out">
-        <Link href="/" className="flex w-24 sm:w-36">
+        <Link href="/" className="flex w-24 sm:w-36" onClick={() => setIsMenuOpen(false)}>
           {logoImage && (
             <Image
               src={`http://localhost:1337${logoImage.url}`}
@@ -63,6 +63,7 @@ export function Header({ data, isHomePage, isScrolled }: Readonly<HeaderProps>) 
                   className="flex cursor-pointer items-center text-lg text-white transition-colors hover:text-gray-200 sm:text-sm font-bold tracking-wider"
                   key={item.text}
                   target={item.isExternal ? "_blank" : "_self"}
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   {item.text}
                 </Link>
@@ -86,7 +87,7 @@ export function Header({ data, isHomePage, isScrolled }: Readonly<HeaderProps>) 
             </div>
           )}
         </div>
-        <MobileNavbar setMenuOpen={setMenuOpen}>
+        <MobileNavbar>
           <div className="absolute flex items-center gap-10 bg-white left-0 right-0 top-0 rounded-b-lg py-4 container text-black shadow-xl text-sm">
             <nav className="flex flex-col gap-1 pt-2 w-full">
               {navItems &&
@@ -95,6 +96,7 @@ export function Header({ data, isHomePage, isScrolled }: Readonly<HeaderProps>) 
                     key={item.text}
                     href={item.href}
                     className="flex w-full cursor-pointer items-center rounded-md p-2 text-gray-600 hover:text-black justify-center font-bold"
+                    onClick={() => setIsMenuOpen(false)}
                   >
                     {item.text}
                   </Link>

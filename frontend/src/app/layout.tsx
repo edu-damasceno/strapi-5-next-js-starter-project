@@ -7,9 +7,9 @@ import { Inter, Nunito } from "next/font/google";
 
 import { cn } from "@/lib/utils";
 
-import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { HeaderWrapper } from "@/components/header-wrapper";
+import { MenuProvider } from "@/contexts/menu-context";
 
 const fontSans = Inter({
   variable: "--font-sans",
@@ -66,9 +66,11 @@ export default async function RootLayout({
           fontHeading.variable,
         )}
       >
-        <HeaderWrapper data={topNav} />
-        {children}
-        <Footer data={footer} />
+        <MenuProvider>
+          <HeaderWrapper data={topNav} />
+          {children}
+          <Footer data={footer} />
+        </MenuProvider>
       </body>
     </html>
   );

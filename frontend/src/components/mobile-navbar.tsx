@@ -1,9 +1,10 @@
 "use client";
 
 import { Menu, X } from "lucide-react";
-import { ReactNode, useState } from "react";
+import { ReactNode } from "react";
 import { useHeaderHeight } from "@/lib/hooks/utils/use-header-height";
 import { useLockBody } from "@/lib/hooks/utils/use-lock-body";
+import { useMenu } from "@/contexts/menu-context";
 
 function MobileMenu({ onClose, children }: { onClose: () => void; children: ReactNode }) {
   useLockBody();
@@ -22,27 +23,19 @@ function MobileMenu({ onClose, children }: { onClose: () => void; children: Reac
   );
 }
 
-export function MobileNavbar({
-  children,
-  setMenuOpen,
-}: {
-  children: ReactNode;
-  setMenuOpen: (open: boolean) => void;
-}) {
-  const [showMobileMenu, setShowMobileMenu] = useState(false);
+export function MobileNavbar({ children }: { children: ReactNode }) {
+  const { isMenuOpen, setIsMenuOpen } = useMenu();
 
   const toggleMenu = () => {
-    const newState = !showMobileMenu;
-    setShowMobileMenu(newState);
-    setMenuOpen(newState);
+    setIsMenuOpen(!isMenuOpen);
   };
 
   return (
     <div className="lg:hidden">
       <button onClick={toggleMenu} className="flex items-center space-x-2 text-white z-50 relative">
-        {showMobileMenu ? <X /> : <Menu />}
+        {isMenuOpen ? <X /> : <Menu />}
       </button>
-      {showMobileMenu && <MobileMenu onClose={() => toggleMenu()}>{children}</MobileMenu>}
+      {isMenuOpen && <MobileMenu onClose={() => setIsMenuOpen(false)}>{children}</MobileMenu>}
     </div>
   );
 }
